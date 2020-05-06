@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_super_user(self, email, password=None):
+    def create_superuser(self, email, password=None):
         """create and saves a new super user"""
         user = self.create_user(email=email, password=password)
         user.is_staff = True
@@ -30,6 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """custom user model that supports using email instead of username"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    phone = models.BigIntegerField(null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

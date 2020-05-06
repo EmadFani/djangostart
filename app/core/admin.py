@@ -8,7 +8,8 @@ from core import models
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
-    list_display = ['email', 'name']
+    list_display = ['name', 'email', 'phone', 'is_staff',
+                    'is_superuser', 'last_login']
     fieldsets = (
         (
             None,
@@ -19,11 +20,12 @@ class UserAdmin(BaseUserAdmin):
         (
             _('Personal info'),
             {
-                'fields': ('name',)
+                'fields': ('name', 'phone')
             }
         ),
         (
-            _('Permissions'), {
+            _('Permissions'),
+            {
                 'fields': ('is_active', 'is_staff', 'is_superuser')
             }
         ),
@@ -45,6 +47,8 @@ class UserAdmin(BaseUserAdmin):
         ),
 
     )
+
+    search_fields = ['name', 'email', 'phone']
 
 
 admin.site.register(models.User, UserAdmin)
